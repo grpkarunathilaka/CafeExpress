@@ -103,6 +103,23 @@
             </select>
           </div>
 
+          <!-- Number of People Field (Hidden for Feedback) -->
+          @if (contactForm.get('type')?.value !== 'Feedback') {
+            <div class="form-group">
+              <label for="people">Number of People</label>
+              <select id="people" formControlName="people">
+                <option value="1">1 Person</option>
+                <option value="2">2 People</option>
+                <option value="3">3 People</option>
+                <option value="4">4 People</option>
+                <option value="5">5 People</option>
+                <option value="6">6 People</option>
+                <option value="7">7 People</option>
+                <option value="8+">8+ People</option>
+              </select>
+            </div>
+          }
+
           <!-- Message Field -->
           <div class="form-group">
             <label for="message">Your Message</label>

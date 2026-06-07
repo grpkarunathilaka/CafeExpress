@@ -41,6 +41,7 @@ export class ContactComponent implements OnInit {
       name: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
       type: ['Reservation', [Validators.required]],
+      people: ['2', [Validators.required]],
       message: ['', [Validators.required, Validators.minLength(10)]]
     });
   }
@@ -61,6 +62,7 @@ export class ContactComponent implements OnInit {
         name: '',
         email: '',
         type: 'Reservation',
+        people: '2',
         message: ''
       });
 
