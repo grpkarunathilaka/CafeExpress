@@ -44,6 +44,37 @@ export class ContactComponent implements OnInit {
       people: ['2', [Validators.required]],
       message: ['', [Validators.required, Validators.minLength(10)]]
     });
+
+    // Handle type change to update default people count
+    this.contactForm.get('type')?.valueChanges.subscribe(type => {
+      if (type === 'Event' || type === 'Catering') {
+        this.contactForm.get('people')?.setValue('20-50', { emitEvent: false });
+      } else {
+        this.contactForm.get('people')?.setValue('2', { emitEvent: false });
+      }
+    });
+  }
+
+  public getPeopleOptions(): { value: string; label: string }[] {
+    const type = this.contactForm?.get('type')?.value;
+    if (type === 'Event' || type === 'Catering') {
+      return [
+        { value: '10-20', label: '10 to 20 People' },
+        { value: '20-50', label: '20 to 50 People' },
+        { value: '50-100', label: '50 to 100 People' },
+        { value: '100+', label: '100+ People' }
+      ];
+    }
+    return [
+      { value: '1', label: '1 Person' },
+      { value: '2', label: '2 People' },
+      { value: '3', label: '3 People' },
+      { value: '4', label: '4 People' },
+      { value: '5', label: '5 People' },
+      { value: '6', label: '6 People' },
+      { value: '7', label: '7 People' },
+      { value: '8+', label: '8+ People' }
+    ];
   }
 
   public onSubmit(): void {
