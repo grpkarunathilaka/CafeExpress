@@ -1,0 +1,143 @@
+<div class="menu-container">
+  <!-- Search & Filter Controls -->
+  <div class="search-filter-section">
+    <div class="search-wrapper">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input 
+        type="text" 
+        [formControl]="searchControl" 
+        placeholder="Search for ingredients, dishes, drinks..."
+        aria-label="Search menu items"
+      />
+      @if (searchControl.value) {
+        <button class="clear-btn" (click)="clearFilters()" aria-label="Clear search text">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      }
+    </div>
+    
+    <div class="filters-wrapper">
+      <button 
+        [class.active]="onlyVegetarian()" 
+        (click)="toggleVegetarian()"
+        class="filter-tag"
+        role="checkbox"
+        [attr.aria-checked]="onlyVegetarian()"
+      >
+        <span class="badge veg-dot"></span> Vegetarian
+      </button>
+      <button 
+        [class.active]="onlyGlutenFree()" 
+        (click)="toggleGlutenFree()"
+        class="filter-tag"
+        role="checkbox"
+        [attr.aria-checked]="onlyGlutenFree()"
+      >
+        <span class="badge gf-dot">GF</span> Gluten-Free
+      </button>
+      @if (onlyVegetarian() || onlyGlutenFree() || searchControl.value) {
+        <button class="reset-btn" (click)="clearFilters()">
+          Clear Filters
+        </button>
+      }
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  @if (menuService.loading()) {
+    <div class="loader-container">
+      <div class="spinner"></div>
+      <p class="loader-text">Preparing our premium menu...</p>
+    </div>
+  } @else {
+    <!-- Sticky Sub-Navigation -->
+    @if (filteredCategories().length > 0) {
+      <nav class="category-nav-container">
+        <div class="category-nav-bar">
+          @for (cat of filteredCategories(); track cat) {
+            <button 
+              [id]="'nav-' + getCategoryId(cat)"
+              [class.active]="activeCategory() === cat"
+              (click)="scrollToCategory(cat)"
+              class="category-nav-link"
+            >
+              {{ cat }}
+            </button>
+          }
+        </div>
+      </nav>
+    }
+
+    <!-- Fallback Banner (Shows when Google Sheet fetch fails and falls back to mock CSV) -->
+    @if (menuService.usingMockData() && !menuService.loading()) {
+      <div class="mock-data-banner">
+        <div class="banner-content">
+          <svg viewBox="0 0 24 24" class="banner-icon" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+          <span class="banner-text">Displaying local menu. Live updates from spreadsheet are currently offline.</span>
+        </div>
+      </div>
+    }
+
+    <!-- Menu Sections -->
+    <div class="menu-sections-wrapper">
+      @for (category of filteredCategories(); track category) {
+        <section 
+          [id]="'category-' + getCategoryId(category)" 
+          [attr.data-category]="category"
+          class="category-section"
+        >
+          <div class="category-header">
+            <h2 class="category-title">{{ category }}</h2>
+            <div class="category-accent-line"></div>
+          </div>
+          
+          <div class="menu-grid">
+            @for (item of groupedFilteredMenu()[category]; track item.ItemName) {
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div class="menu-item-title-row">
+                    <h3 class="menu-item-name">{{ item.ItemName }}</h3>
+                    <div class="badge-indicators">
+                      @if (item.isVegetarian) {
+                        <span class="item-badge veg" title="Vegetarian">V</span>
+                      }
+                      @if (item.isGlutenFree) {
+                        <span class="item-badge gf" title="Gluten-Free">GF</span>
+                      }
+                    </div>
+                  </div>
+                  <div class="menu-item-dots"></div>
+                  <span class="menu-item-price">${{ item.Price.toFixed(2) }}</span>
+                </div>
+                @if (item.Description) {
+                  <p class="menu-item-description">{{ item.Description }}</p>
+                }
+              </div>
+            }
+          </div>
+        </section>
+      } @empty {
+        <div class="no-results-container">
+          <svg class="no-results-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            <line x1="8" y1="11" x2="14" y2="11"></line>
+          </svg>
+          <h3 class="no-results-title">No Menu Items Found</h3>
+          <p class="no-results-text">We couldn't find any items matching your filters. Try adjusting your search query or toggles.</p>
+          <button class="clear-search-btn" (click)="clearFilters()">Reset Filters</button>
+        </div>
+      }
+    </div>
+  }
+</div>

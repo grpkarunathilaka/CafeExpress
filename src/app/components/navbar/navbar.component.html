@@ -1,0 +1,49 @@
+<nav class="navbar">
+  <div class="navbar-container">
+    <!-- Brand Logo -->
+    <a routerLink="/" class="navbar-logo" (click)="closeMobileMenu()">
+      <span class="logo-text">Café Express</span>
+    </a>
+
+    <!-- Hamburger Icon for Mobile -->
+    <button 
+      class="mobile-menu-toggle" 
+      [class.open]="isMobileMenuOpen()" 
+      (click)="toggleMobileMenu()" 
+      aria-label="Toggle navigation menu"
+      [attr.aria-expanded]="isMobileMenuOpen()"
+    >
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+
+    <!-- Navigation Links -->
+    <div class="navbar-links" [class.open]="isMobileMenuOpen()">
+      <a 
+        routerLink="/home" 
+        routerLinkActive="active" 
+        class="nav-item" 
+        (click)="closeMobileMenu()"
+      >Home</a>
+      <a 
+        routerLink="/menu" 
+        routerLinkActive="active" 
+        class="nav-item" 
+        (click)="closeMobileMenu()"
+      >Our Menu</a>
+      <a 
+        routerLink="/contact" 
+        routerLinkActive="active" 
+        class="nav-item" 
+        (click)="closeMobileMenu()"
+      >Contact Us</a>
+      <a 
+        routerLink="/contact" 
+        fragment="inquiry-form"
+        class="navbar-cta-btn" 
+        (click)="closeMobileMenu()"
+      >Book A Table</a>
+    </div>
+  </div>
+</nav>

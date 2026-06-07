@@ -1,0 +1,118 @@
+<div class="home-container">
+  <!-- Interactive Hero Carousel -->
+  <section class="hero-carousel" aria-label="Featured Cafe Highlights">
+    <div class="carousel-track">
+      @for (slide of slides; track slide.title; let idx = $index) {
+        <div 
+          class="carousel-slide" 
+          [class.active]="activeSlide() === idx"
+          [attr.aria-hidden]="activeSlide() !== idx"
+        >
+          <div 
+            class="slide-image" 
+            [style.background-image]="'url(' + slide.image + ')'"
+          ></div>
+          <div class="slide-overlay"></div>
+          <div class="slide-content-wrapper">
+            <div class="slide-content">
+              <h2 class="slide-title">{{ slide.title }}</h2>
+              <p class="slide-subtitle">{{ slide.subtitle }}</p>
+              <button 
+                class="slide-cta-btn" 
+                (click)="navigateToMenu()"
+                aria-label="View our specialty menu"
+              >
+                View Our Menu
+              </button>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Carousel Controls -->
+    <button 
+      class="carousel-arrow prev" 
+      (click)="prevSlide()" 
+      aria-label="Previous slide"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+    <button 
+      class="carousel-arrow next" 
+      (click)="nextSlide()" 
+      aria-label="Next slide"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+
+    <!-- Carousel Indicators -->
+    <div class="carousel-indicators">
+      @for (slide of slides; track slide.title; let idx = $index) {
+        <button 
+          class="indicator-dot" 
+          [class.active]="activeSlide() === idx"
+          (click)="goToSlide(idx)"
+          [attr.aria-label]="'Go to slide ' + (idx + 1)"
+        ></button>
+      }
+    </div>
+  </section>
+
+  <!-- Welcome Introduction -->
+  <section class="welcome-section">
+    <div class="section-container">
+      <div class="welcome-card">
+        <span class="sub-heading">OUR STORY</span>
+        <h3 class="welcome-title">A Sanctuary for Coffee & Food Lovers</h3>
+        <p class="welcome-text">
+          At Café Express, we believe that dining is an art form. Tucked away in a warm, light-filled space, we combine the rich heritage of traditional hospitality with modern culinary craft. Every ingredient is sourced with care from local farms, and our specialty coffee beans are micro-roasted to ensure an unparalleled experience in every cup.
+        </p>
+        <p class="welcome-text">
+          Whether you are sharing a fresh paninimelt with old friends, picking up an organic green detox juice on your morning run, or seeking a quiet space to read with a single-origin pour-over, we welcome you to our table.
+        </p>
+        <div class="welcome-accent-line"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Highlight Specialties Grid -->
+  <section class="specialties-section">
+    <div class="section-container">
+      <h3 class="specialties-heading">Our Three Pillars</h3>
+      <div class="specialties-grid">
+        <div class="specialty-card">
+          <div class="specialty-icon-box">☕</div>
+          <h4 class="specialty-title">Specialty Brews</h4>
+          <p class="specialty-desc">Velvety flat whites, precise V60 pour-overs, and cold drip coffee extracted over 10 hours for rich flavor notes.</p>
+        </div>
+        <div class="specialty-card">
+          <div class="specialty-icon-box">🍳</div>
+          <h4 class="specialty-title">Kitchen Craft</h4>
+          <p class="specialty-desc">Spiced shakshuka eggs, smashed pumpkin sourdough spreads, and signature high-end artisan beef burgers.</p>
+        </div>
+        <div class="specialty-card">
+          <div class="specialty-icon-box">🍰</div>
+          <h4 class="specialty-title">Sweet Treats</h4>
+          <p class="specialty-desc">Lemon meringue tarts, salted caramel macadamia brownies, and gluten-free raspberry friands baked fresh daily.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Page Navigation Footer CTA -->
+  <section class="cta-banner-section">
+    <div class="cta-banner-content">
+      <h3 class="cta-title">Ready to experience Café Express?</h3>
+      <p class="cta-desc">Browse our full menu or check opening hours and contact details to plan your visit.</p>
+      <div class="cta-buttons">
+        <a routerLink="/menu" class="cta-btn primary">Explore Menu</a>
+        <a routerLink="/contact" class="cta-btn secondary">Contact Us</a>
+      </div>
+    </div>
+  </section>
+</div>

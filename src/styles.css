@@ -1,0 +1,52 @@
+/* Import Google Fonts for Cafe Aesthetic */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+/* CSS Variables for Clean Cafe Aesthetic */
+:root {
+  --color-bg-cream: #FAF9F6;
+  --color-bg-linen: #FFFFFF;
+  --color-accent-espresso: #3D2314;
+  --color-text-charcoal: #2C2C2C;
+  --color-text-muted: #757069;
+  --color-border: #EAE6DF;
+}
+
+/* Reset and Global Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-bg-cream);
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--color-text-charcoal);
+  background-color: var(--color-bg-cream);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar for non-category scroll elements */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-cream);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E0DACF;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent-espresso);
+}

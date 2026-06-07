@@ -1,0 +1,446 @@
+.home-container {
+  background-color: #FAF9F6;
+  min-height: calc(100vh - 70px);
+}
+
+/* Interactive Hero Carousel */
+.hero-carousel {
+  position: relative;
+  height: 550px;
+  width: 100%;
+  overflow: hidden;
+  background-color: #2C2C2C;
+}
+
+.carousel-track {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 0;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel-slide.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;
+}
+
+.slide-image {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  /* Add subtle zoom animation on the active slide image */
+  transform: scale(1.05);
+  transition: transform 6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.carousel-slide.active .slide-image {
+  transform: scale(1);
+}
+
+.slide-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(61, 35, 20, 0.2) 0%,
+    rgba(0, 0, 0, 0.55) 80%
+  );
+}
+
+.slide-content-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+}
+
+.slide-content {
+  max-width: 700px;
+  text-align: center;
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateY(20px);
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.carousel-slide.active .slide-content {
+  transform: translateY(0);
+}
+
+.slide-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 42px;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.slide-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.6;
+  margin: 0 0 32px 0;
+  opacity: 0.9;
+  max-width: 600px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.slide-cta-btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #3D2314;
+  background-color: #FAF9F6;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 28px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.slide-cta-btn:hover {
+  background-color: #FFFFFF;
+  color: #2C2C2C;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Carousel Navigation Arrows */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.carousel-arrow:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.carousel-arrow.prev {
+  left: 24px;
+}
+
+.carousel-arrow.next {
+  right: 24px;
+}
+
+.carousel-arrow svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Carousel Indicators */
+.carousel-indicators {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  gap: 12px;
+}
+
+.indicator-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.indicator-dot.active {
+  background-color: #FFFFFF;
+  transform: scale(1.2);
+}
+
+/* Section Container */
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Welcome Section */
+.welcome-section {
+  padding: 80px 0 60px 0;
+}
+
+.welcome-card {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #FFFFFF;
+  border: 1px solid #EAE6DF;
+  border-top: 3px solid #3D2314;
+  border-radius: 12px;
+  padding: 48px;
+  text-align: center;
+  box-shadow: 0 4px 24px rgba(61, 35, 20, 0.03);
+}
+
+.sub-heading {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #3D2314;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.welcome-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #3D2314;
+  margin: 0 0 24px 0;
+}
+
+.welcome-text {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #5C544C;
+  margin-bottom: 20px;
+}
+
+.welcome-accent-line {
+  width: 60px;
+  height: 1px;
+  background-color: #3D2314;
+  margin: 32px auto 0 auto;
+}
+
+/* Specialties Section */
+.specialties-section {
+  padding: 60px 0 80px 0;
+  background-color: #FFFFFF;
+  border-top: 1px solid #EAE6DF;
+  border-bottom: 1px solid #EAE6DF;
+}
+
+.specialties-heading {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #3D2314;
+  text-align: center;
+  margin: 0 0 48px 0;
+}
+
+.specialties-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.specialty-card {
+  text-align: center;
+  padding: 24px;
+  background-color: #FAF9F6;
+  border: 1px solid #EAE6DF;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.specialty-card:hover {
+  transform: translateY(-4px);
+  border-color: #3D2314;
+  box-shadow: 0 4px 16px rgba(61, 35, 20, 0.05);
+}
+
+.specialty-icon-box {
+  font-size: 36px;
+  margin-bottom: 16px;
+}
+
+.specialty-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #3D2314;
+  margin: 0 0 12px 0;
+}
+
+.specialty-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #757069;
+  margin: 0;
+}
+
+/* Page Navigation CTA Banner */
+.cta-banner-section {
+  background-color: #3D2314;
+  color: #FFFFFF;
+  padding: 80px 24px;
+  text-align: center;
+}
+
+.cta-banner-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cta-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+}
+
+.cta-desc {
+  font-size: 16px;
+  opacity: 0.9;
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.cta-btn {
+  display: inline-block;
+  padding: 12px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.cta-btn.primary {
+  background-color: #FAF9F6;
+  color: #3D2314;
+}
+
+.cta-btn.primary:hover {
+  background-color: #FFFFFF;
+  color: #2C2C2C;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.cta-btn.secondary {
+  background-color: transparent;
+  color: #FFFFFF;
+  border: 1.5px solid #FFFFFF;
+}
+
+.cta-btn.secondary:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Responsive Rules */
+@media (max-width: 768px) {
+  .hero-carousel {
+    height: 400px;
+  }
+
+  .slide-title {
+    font-size: 28px;
+  }
+
+  .slide-subtitle {
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+
+  .carousel-arrow {
+    width: 38px;
+    height: 38px;
+  }
+
+  .carousel-arrow.prev {
+    left: 12px;
+  }
+
+  .carousel-arrow.next {
+    right: 12px;
+  }
+
+  .welcome-section {
+    padding: 48px 0;
+  }
+
+  .welcome-card {
+    padding: 24px;
+  }
+
+  .welcome-title {
+    font-size: 24px;
+  }
+
+  .specialties-section {
+    padding: 48px 0;
+  }
+
+  .specialties-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .cta-banner-section {
+    padding: 60px 16px;
+  }
+
+  .cta-title {
+    font-size: 26px;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .cta-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
