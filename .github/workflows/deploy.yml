@@ -30,6 +30,7 @@ jobs:
           # Dynamically extract the repository name to use as base-href for subdirectory hosting
           REPO_NAME=$(echo "${{ github.repository }}" | cut -d '/' -f 2)
           npx ng build --configuration production --base-href "/$REPO_NAME/"
+          cp dist/cafe-express/browser/index.html dist/cafe-express/browser/404.html
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
